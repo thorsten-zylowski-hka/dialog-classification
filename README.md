@@ -27,7 +27,7 @@ print("Explanation:", explanation)
 ```
 
 ## More languages
-By the choice of the model, the classification as well as the explanation can be used for different languages. On the one hand, the model to be used is passed via the model_name parameter. On the other hand, a hypothesis template must be specified in the corresponding language, which corresponds to the English default hypothesis template "Thist example is {}.". The curly brackets are mandatory, since at this place the appropriate label is inserted.
+By the choice of the model, the classification as well as the explanation can be used for different languages. On the one hand, the model to be used is passed via the model_name parameter. On the other hand, a hypothesis template must be specified in the corresponding language, which corresponds to the English default hypothesis template "This example is {}.". The curly brackets are mandatory, since at this place the appropriate label is inserted.
 
 The following example shows the usage for the German language.
 
