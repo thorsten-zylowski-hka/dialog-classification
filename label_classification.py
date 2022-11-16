@@ -41,5 +41,13 @@ class ZeroShotLabelClassifierExplainer:
     def explain(self, text, label, num_features=15, num_samples=100):
         self.hypothesis_template.replace('{}', label)+'.'
         exp_text = text + '</>' + self.hypothesis_template.replace('{}', label)
-        explanation = self.explainer.explain_instance(exp_text, self.predictor, num_features=num_features, num_samples=num_samples, top_labels=3)
-        return explanation.as_list(label=2)
+        expanded_num_features = num_features + len(self.hypothesis_template.split())
+        explanation = self.explainer.explain_instance(exp_text, self.predictor, num_features=expanded_num_features, num_samples=num_samples, top_labels=3)
+
+        explanation_list = explanation.as_list(label=2)
+
+        explanation_list = [{"key": item[0], "value": item[1] } for item in explanation_list if not (item[0] in self.hypothesis_template.replace('{}', label) and item[0] not in text)]        
+        
+        return {
+            "highlights": explanation_list
+        }

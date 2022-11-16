@@ -26,6 +26,67 @@ explanation = explainer.explain(text, label=most_likely_label)
 print("Explanation:", explanation)
 ```
 
+## Return values
+Classifier and explainer both return dictionaries which can easily be transformed to JSON.
+
+### Classification
+```json
+{
+    "sequence": "Ich male gerne mit Ölfarben auf Leinwände.",
+    "labels": [
+        "künstlerisch",
+        "sozial",
+        "investigativ",
+        "konventionell",
+        "unternehmerisch",
+        "realistisch"
+    ],
+    "scores": [
+        0.6761776804924011,
+        0.12924496829509735,
+        0.06201709061861038,
+        0.0512198880314827,
+        0.04103587940335274,
+        0.04030449688434601
+    ]
+}
+```
+
+### Explanation
+```json
+{
+    "highlights": [
+        {
+            "key": "gerne",
+            "value": 0.02039188985575313
+        },
+        {
+            "key": "Ich",
+            "value": -0.014657435456174138
+        },
+        {
+            "key": "Leinwände",
+            "value": 0.006532542314393964
+        },
+        {
+            "key": "male",
+            "value": 0.002843916273899499
+        },
+        {
+            "key": "Ölfarben",
+            "value": 0.002825456106864587
+        },
+        {
+            "key": "auf",
+            "value": 0.002699091365190593
+        },
+        {
+            "key": "mit",
+            "value": -0.0012255975250213022
+        }
+    ]
+}
+```
 ## More languages
 By the choice of the model, the classification as well as the explanation can be used for different languages. On the one hand, the model to be used is passed via the model_name parameter. On the other hand, a hypothesis template must be specified in the corresponding language, which corresponds to the English default hypothesis template "This example is {}.". The curly brackets are mandatory, since at this place the appropriate label is inserted.
 
