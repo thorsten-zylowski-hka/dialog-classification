@@ -55,34 +55,35 @@ Classifier and explainer both return dictionaries which can easily be transforme
 ### Explanation
 ```json
 {
+    "label": "künstlerisch",
     "highlights": [
         {
-            "key": "gerne",
-            "value": 0.02039188985575313
-        },
-        {
-            "key": "Ich",
-            "value": -0.014657435456174138
-        },
-        {
-            "key": "Leinwände",
-            "value": 0.006532542314393964
-        },
-        {
-            "key": "male",
-            "value": 0.002843916273899499
+            "key": "mit",
+            "value": -0.019699673298812104
         },
         {
             "key": "Ölfarben",
-            "value": 0.002825456106864587
+            "value": 0.01607146873328142
+        },
+        {
+            "key": "Ich",
+            "value": -0.01460975509297848
         },
         {
             "key": "auf",
-            "value": 0.002699091365190593
+            "value": 0.012080694272585452
         },
         {
-            "key": "mit",
-            "value": -0.0012255975250213022
+            "key": "male",
+            "value": -0.0117092584679759
+        },
+        {
+            "key": "Leinwände",
+            "value": 0.010141154599231662
+        },
+        {
+            "key": "gerne",
+            "value": 0.004742624167008458
         }
     ]
 }

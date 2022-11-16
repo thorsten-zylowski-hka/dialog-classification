@@ -49,5 +49,6 @@ class ZeroShotLabelClassifierExplainer:
         explanation_list = [{"key": item[0], "value": item[1] } for item in explanation_list if not (item[0] in self.hypothesis_template.replace('{}', label) and item[0] not in text)]        
         
         return {
+            "label": label,
             "highlights": explanation_list
         }
