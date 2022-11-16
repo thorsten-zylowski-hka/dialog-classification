@@ -5,11 +5,10 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 class ZeroShotLabelClassifier:
 
-    def __init__(self, labels, model_name='facebook/bart-large-mnli'):
+    def __init__(self, labels, model_name='facebook/bart-large-mnli', hypothesis_template='This example is {}.'):
         self.model_name = model_name
-        self.classifier = pipeline('zero-shot-classification', model=model_name) 
+        self.classifier = pipeline('zero-shot-classification', model=model_name, hypothesis_template=hypothesis_template) 
         self.labels = labels
-        self.explainer = LimeTextExplainer(class_names=['contradiction', 'neutral', 'entailment'])
 
 
     def classify(self, text):
@@ -19,12 +18,13 @@ class ZeroShotLabelClassifier:
 
 class ZeroShotLabelClassifierExplainer:
     
-    def __init__(self, model_name='facebook/bart-large-mnli', sep_token='</>'):
+    def __init__(self, model_name='facebook/bart-large-mnli', sep_token='</>', hypothesis_template='This example is {}.'):
         self.model_name = model_name
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(self.model_name)
         self.sep_token = sep_token
         self.explainer = LimeTextExplainer(class_names=['contradiction', 'neutral', 'entailment'])
+        self.hypothesis_template = hypothesis_template
 
     def predictor(self, texts):
         inputs = []
@@ -39,6 +39,7 @@ class ZeroShotLabelClassifierExplainer:
         return probas
 
     def explain(self, text, label, num_features=15, num_samples=100):
-        exp_text = text + '</>' + 'This example is ' + label + '.'
+        self.hypothesis_template.replace('{}', label)+'.'
+        exp_text = text + '</>' + self.hypothesis_template.replace('{}', label)
         explanation = self.explainer.explain_instance(exp_text, self.predictor, num_features=num_features, num_samples=num_samples, top_labels=3)
         return explanation.as_list(label=2)
