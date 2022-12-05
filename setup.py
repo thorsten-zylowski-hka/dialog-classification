@@ -1,10 +1,9 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 setup(
-   name='zeroshotclassifierexplainer',
-   version='1.0',
-   description='Zero-shot classification and LIME explanations.',
-   author='Thorsten Zylowski',
-   author_email='thorsten.zylowski@h-ka.de',
-   packages=['zeroshotclassifierexplainer'],  #same as name
-   install_requires=['transformers', 'lime'], #external packages as dependencies
+   name='label-classification-explanation',
+   version='1.0.0',
+   description='Zero-shot classification and explanations.',
+   author='HKA',
+   author_email='foomail@foo.example',
+   packages=find_packages()
 )
